@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @job.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @job.description %>
+</p>
+
+<p>
+  <b>Company name:</b>
+  <%= @job.company_name %>
+</p>
+
+<p>
+  <b>Company info:</b>
+  <%= @job.company_info %>
+</p>
+
+<p>
+  <b>Salary:</b>
+  <%= @job.salary %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @job.location %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', :controller => 'joblist', :action=> 'index' %>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/javascripts/excanvas/excanvas.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/javascripts/spinners/spinners.min.js"></script>
+    <script type="text/javascript" src="/javascripts/lightview/lightview.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/lightview/lightview.css"/>
+  </head>
+
+  <body>
+
+   
+    <h5 align="left"> <%=link_to 'Admin Login', jobs_url %> </h5>
+    <h1 align="center">Jobster</h1>
+    <h5 align="center"> "your job search ends here" </h5>
+
+    <div>
+      <h5 align="center"> Job Listings </h5>
+      <table align="center">
+        <tr>
+          <th>Job ID</th>
+          <th>Job Title</th>
+          <th>Description</th>
+          <th>Company</th>
+          <th>About</th>
+          <th>Salary</th>
+          <th>Location</th>
+
+        </tr>
+      <% @jobs.each do |job|%>
+        <tr>
+          <td align="center"> <%=  job.id%> </td>
+          <td align="left"> <%=  job.title %></td>
+          <td align="center"> <%=  truncate(strip_tags(job.description),:length=>10)%> <a href="<%= job_path(job) %>" class="lightview" data-lightview-type="iframe"
+                 data-lightview-options="width: 1000, height: '100%'">..</a> </td>
+          <td align="center"> <%=  job.company_name%> </td>
+          <td align="center"> <%=  truncate(strip_tags(job.company_info),:length=>10)%> <a href="<%= job_path(job) %>" class="lightview" data-lightview-type="iframe"
+                 data-lightview-options="width: 1000, height: '100%'">..</a> </td>
+          <td align="center"> <%=  job.salary%> </td>
+          <td align="center"> <%=  job.location%> </td>
+        </tr>
+      <% end %>
+      </table>
+       
+
+      <div id="search" align="center">
+        <%= form_tag url_for(:controller => 'joblist', :action => 'index'), :method => 'get' do %>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", :name => nil %>
+      </p>
+    <% end %>
+
+      <% if (@search_results.present?)%>
+      <%  @search_results.each do |result| %>
+        <%= result.id %>
+        <%= result.title %>
+        <a href="<%= job_path(result) %>" class="lightview" data-lightview-type="iframe"
+                 data-lightview-options="width: 1000, height: '100%'">Learn more..</a>
+        <br/>
+      <% end %>
+      <% end %>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+
